@@ -1,0 +1,12 @@
+{
+    "letter": {
+        "subject" : "Testing",
+        "from.name" : "Test",
+        "from.email": "test@sendsay.ru",
+        "message": {
+            "html" : "Sendsay API client test message<hr>Hello!</a>"
+        },
+        "attaches": [ "test/data/img.png" ]
+     },
+     "users.list" : "test@sendsay.ru"
+}
