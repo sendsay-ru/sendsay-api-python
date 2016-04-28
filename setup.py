@@ -4,13 +4,13 @@ from setuptools import setup
 exec(open("sendsay/version.py").read())
 
 setup(
-    name='sendsay',
+    name='sendsay-api-python',
     version=__version__,
     description='The Sendsay API client library.',
-    author='Sendsay',
+    author='Vadim Khakulov',
     maintainer='Vadim Khakulov',
     maintainer_email='vadim.khakulov@gmail.com',
-    url='https://github.com/axens/sendsay',
+    url='https://github.com/sendsay-ru/sendsay-api-python',
     license='Apache',
     test_suite='test.test_sendsay',
     packages=["sendsay","test"],
@@ -27,5 +27,6 @@ setup(
     ],
     install_requires=[
         'requests',
+        'ndg-httpsclient'
     ],
 )
