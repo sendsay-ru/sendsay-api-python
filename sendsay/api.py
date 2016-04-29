@@ -6,7 +6,7 @@ from time import sleep
 import logging
 
 from exceptions import SendsayAPIError
-
+from version import __version__
 DEFAULT_API_URL = 'https://api.sendsay.ru'
 MAX_ATTEMPTS_REDIRECT = 10
 MAX_ATTEMPTS_AUTH = 10
@@ -107,7 +107,7 @@ class SendsayAPI(object):
             'apiversion' : 100,
             'json' : 1,
             'request' : json.dumps(request_params),
-            'request.id' : uuid.uuid4()
+            'request.id' : "sap%s-%s" % (__version__, uuid.uuid4())
         }
 
         logger.debug('-- request %s, "%s"' % (self.api_url + self.redirect_prefix, action))
