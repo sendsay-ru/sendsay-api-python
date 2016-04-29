@@ -36,7 +36,7 @@ class SendsayAPI(object):
         self.redirect_attempts = 0
         self.redirect_prefix = ''
         self.login = login
-        self.sublogin = sublogin or login
+        self.sublogin = sublogin or ''
         self.password = password
         self.api_url = api_url
         self.creds_func = creds_func
