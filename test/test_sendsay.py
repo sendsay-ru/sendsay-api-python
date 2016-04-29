@@ -46,6 +46,9 @@ class TestMain(SendsayTestCase):
         self.assertEqual(data, self.api.attach_file(data_full_filename("img.png")), msg="attach_file() returns a wrong response")
 
     def test_track_wait(self):
+        if not os.environ['SENDSAY_TEST_EMAIL']:
+            raise Exception("SENDSAY_TEST_EMAIL doesn't exists in environmental variables.")
+
         data = data_from_file("test_track_wait.json")
         resp = self.api.request('issue.send', {
             'sendwhen':'now',
@@ -59,7 +62,7 @@ class TestMain(SendsayTestCase):
                 ],
             },
             'relink' : 1,
-            'users.list': data['users.list'],
+            'users.list': os.environ['SENDSAY_TEST_EMAIL'],
             'group' : 'masssending',
         })
 
