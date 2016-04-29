@@ -15,7 +15,7 @@ class SendsayTestCase(unittest.TestCase):
             self.kwargs['login'] = os.environ['SENDSAY_LOGIN']
             self.kwargs['password'] = os.environ['SENDSAY_PASSWORD']
         except KeyError:
-            raise Exception("SENDSAY_LOGIN and SENDSAY_PASSWORD doesn't exists in environmental variables.")
+            raise Exception("SENDSAY_LOGIN and SENDSAY_PASSWORD should be exists in environmental variables.")
 
         if 'SENDSAY_SUBLOGIN' in os.environ:
             self.kwargs['sublogin'] = os.environ['SENDSAY_SUBLOGIN']
