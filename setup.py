@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from setuptools import setup
+from setuptools import setup, find_packages
 
 exec(open("sendsay/version.py").read())
 
@@ -8,12 +8,14 @@ setup(
     version=__version__,
     description='The Sendsay API client library.',
     author='Vadim Khakulov',
+    author_email='vadim.khakulov@gmail.com',
     maintainer='Vadim Khakulov',
     maintainer_email='vadim.khakulov@gmail.com',
     url='https://github.com/sendsay-ru/sendsay-api-python',
     license='Apache',
     test_suite='test.test_sendsay',
-    packages=["sendsay","test"],
+    packages=find_packages(),
+    include_package_data=True,
     long_description=open("README.rst").read(),
     classifiers=[
         'License :: OSI Approved :: Apache Software License',
