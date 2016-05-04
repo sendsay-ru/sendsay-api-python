@@ -30,9 +30,15 @@ Getting the instance of the SendsayAPI class
 
 Making a simple request
 -------------------
+
 .. code-block:: python
 
+    # Calling with parameters as dict
+    response = api.request('member.set', { 'email': 'test1k@test.ru', 'addr_type': 'email', 'if_exists': 'overwrite', 'newbie.confirm': 0, 'return_fresh_obj': 1 })
+
+    # Or with parameters as kwargs if we don't have '.' in any parameter name
     response = api.request('sys.settings.get', list=['about.name'])
+
 
 Making an async request
 -------------------
@@ -45,7 +51,7 @@ Making an async request
             'from.name': "Tester",
             'from.email': "test@test.ru",
             'message': {
-                'html': "Sendsay API client test message<hr>Hello!</a>"
+                'html': "Sendsay API client test message<hr>Hello!"
             },
             'attaches': [
                 api.attach_file("sample.jpg")
@@ -61,7 +67,7 @@ Making an async request
     def track_process(resp, status_msg):
         print('---- %s' % status_msg) # Print a status message for example
 
-    # Waiting for the end of the process with status tracking
+    # Waiting for the end of the process
 
     result = api.track_wait(
         response,
