@@ -9,7 +9,7 @@ Installation
 
 .. code-block:: shell
 
-    pip install -e git+https://github.com/sendsay-ru/sendsay-api-python.git#egg=sendsay-api-python
+    pip install sendsay-api-python
 
 Requirements
 ===================
