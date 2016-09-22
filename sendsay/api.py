@@ -7,6 +7,7 @@ import logging
 
 from exceptions import SendsayAPIError
 from version import __version__
+
 DEFAULT_API_URL = 'https://api.sendsay.ru'
 MAX_ATTEMPTS_REDIRECT = 10
 MAX_ATTEMPTS_AUTH = 10
@@ -113,11 +114,11 @@ class SendsayAPI(object):
         logger.debug('-- request %s, "%s"' % (self.api_url + self.redirect_prefix, action))
         r = requests.post(self.api_url + self.redirect_prefix, data=post_data, cert=self.cert)
 
-        # Parse response as JSON
+        # Parse the response as JSON
         try:
             resp_data = r.json()
         except ValueError as e:
-            print r.text
+            logger.error('-- can not parse "%s"' % r.text)
             raise SendsayAPIError([ { 'id': 'sendsay_api_client/json_parse_error', 'explain': e } ])
 
         # Parse errors
@@ -129,21 +130,21 @@ class SendsayAPI(object):
             errors = [ resp_data['error'] ]
 
         if errors:
-            # Auth expired lookup
+            # If auth session has expired
             for error in errors:
                 if error['id'] == 'error/auth/failed' and error['explain']  == 'expired' and action != 'login':
 
-                    # Session is wrong or expired
+                    # The session is wrong or expired
                     if self.auth_attempts < MAX_ATTEMPTS_AUTH:
                         self.auth_attempts += 1
                         self.session = None
 
-                        # Try to get session
+                        # Try to get a session
                         return self.request(action, params)
                     else:
                         raise SendsayAPIError([ { 'id': 'sendsay_api_client/too_many_auth_attempts' } ])
 
-            # Raise exception
+            # Raise an exception
             raise SendsayAPIError(errors)
 
         # Perform redirects
