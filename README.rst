@@ -11,11 +11,17 @@ Installation
 
     pip install sendsay-api-python
 
-Requirements
+Dependencies 
 ===================
 
 * requests
+
+If your Python version older than 2.7.9, the following packages are required to support TLS SNI certificate checking:
+
 * ndg-httpsclient
+* pyopenssl
+* pyasn1
+
 
 Usage
 ===================
