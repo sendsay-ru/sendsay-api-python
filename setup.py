@@ -1,7 +1,21 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
+import sys
 
 exec(open("sendsay/version.py").read())
+
+if sys.version_info >= (2,7,9):
+    install_requires=[
+        'requests',
+    ]
+else: # TLS-SNI Support
+    install_requires=[
+        'requests',
+        'ndg-httpsclient',
+        'pyopenssl', 
+        'pyasn1'
+    ]
+
 
 setup(
     name='sendsay-api-python',
@@ -27,8 +41,5 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5'
     ],
-    install_requires=[
-        'requests',
-        'ndg-httpsclient'
-    ],
+    install_requires=install_requires
 )
