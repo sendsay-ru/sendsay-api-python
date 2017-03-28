@@ -1,45 +1,42 @@
-IMPORTANT:
-===================
-
-Please note that the current version of the package is not backward compatible with the versions before v1.0.0.
-
-* API request returns an instance of `Response` instead of dict
-* `track_wait` was removed from `SendsayAPI` class. You can get the tracking information by using
-`track` method of a response returned
-* `attach_file` is a method of `sendsay.api` module
-
-
 ===================
 Sendsay API Python
 ===================
 
 The client library to support Sendsay API.
 
+Please note that the current version of the package is not backward compatible with the versions before v1.0.0.
+
+* API request returns an instance of ``Response`` instead of dict
+* ``track_wait`` was removed from ``SendsayAPI`` class. You can get the tracking information by using
+  ``track`` method of a response returned
+* ``attach_file`` is a method of ``sendsay.api`` module
+
+
 
 Installation
-===================
+============
 
 .. code-block:: shell
 
     pip install sendsay-api-python
 
 Dependencies 
-===================
+============
 
-* requests
+* ``requests``
 
 If your Python version older than 2.7.9, the following packages are required to support TLS SNI certificate checking:
 
-* ndg-httpsclient
-* pyopenssl
-* pyasn1
+* ``ndg-httpsclient``
+* ``pyopenssl``
+* ``pyasn1``
 
 
 Usage
-===================
+=====
 
 Getting an instance of the SendsayAPI class
--------------------
+-------------------------------------------
 .. code-block:: python
 
   from sendsay.api import SendsayAPI
@@ -47,7 +44,7 @@ Getting an instance of the SendsayAPI class
     api = SendsayAPI(login='<YOUR_LOGIN>', sublogin='<YOUR_SUBLOGIN>', password='<YOUR_PASSWORD>')
 
 Making a simple request
--------------------
+-----------------------
 
 .. code-block:: python
 
@@ -61,7 +58,7 @@ Making a simple request
 
 
 Making an async request and track the result
--------------------
+--------------------------------------------
 .. code-block:: python
 
     from sendsay.api import SendsayAPI, attach_file
