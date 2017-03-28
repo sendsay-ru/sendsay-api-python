@@ -1,13 +1,13 @@
+"""Sandsay test package initialization."""
+
 import os
 import unittest
 import logging
 
 from sendsay.api import SendsayAPI
 
-def show_track_process(resp, status_msg):
-    print ('---- %s' % status_msg)
-
 class SendsayTestCase(unittest.TestCase):
+    """Base class for tests"""
     def setUp(self):
         self.kwargs = {}
 
@@ -15,7 +15,8 @@ class SendsayTestCase(unittest.TestCase):
             self.kwargs['login'] = os.environ['SENDSAY_LOGIN']
             self.kwargs['password'] = os.environ['SENDSAY_PASSWORD']
         except KeyError:
-            raise Exception("SENDSAY_LOGIN and SENDSAY_PASSWORD should be exists in environmental variables.")
+            raise Exception("SENDSAY_LOGIN and SENDSAY_PASSWORD should be exist \
+                            in environmental variables.")
 
         if 'SENDSAY_SUBLOGIN' in os.environ:
             self.kwargs['sublogin'] = os.environ['SENDSAY_SUBLOGIN']

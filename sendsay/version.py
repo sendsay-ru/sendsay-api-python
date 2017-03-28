@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-#
+"""THe module only contains the package version"""
 # Copyright 2016 Vadim Khakulov
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -13,5 +12,6 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+
 
 __version__ = "0.1.4"

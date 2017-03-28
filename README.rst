@@ -1,8 +1,20 @@
+IMPORTANT:
+===================
+
+Please note that the current version of the package is not backward compatible with the versions before v1.0.0.
+
+* API request returns an instance of `Response` instead of dict
+* `track_wait` was removed from `SendsayAPI` class. You can get the tracking information by using
+`track` method of a response returned
+* `attach_file` is a method of `sendsay.api` module
+
+
 ===================
 Sendsay API Python
 ===================
 
 The client library to support Sendsay API.
+
 
 Installation
 ===================
@@ -26,7 +38,7 @@ If your Python version older than 2.7.9, the following packages are required to 
 Usage
 ===================
 
-Getting the instance of the SendsayAPI class
+Getting an instance of the SendsayAPI class
 -------------------
 .. code-block:: python
 
@@ -39,16 +51,21 @@ Making a simple request
 
 .. code-block:: python
 
-    # Calling with parameters as dict
+    # Calling with parameters
     response = api.request('member.set', { 'email': 'test1k@test.ru', 'addr_type': 'email', 'if_exists': 'overwrite', 'newbie.confirm': 0, 'return_fresh_obj': 1 })
 
-    # Or with parameters as kwargs if we don't have '.' in any parameter name
-    response = api.request('sys.settings.get', list=['about.name'])
+    # Getting the response data
+
+    response = api.request('sys.settings.get', dict(list=['about.name']))
+    print(response.data)
 
 
-Making an async request
+Making an async request and track the result
 -------------------
 .. code-block:: python
+
+    from sendsay.api import SendsayAPI, attach_file
+    from time import sleep
 
     response = api.request('issue.send', {
         'sendwhen': 'now',
@@ -60,7 +77,7 @@ Making an async request
                 'html': "Sendsay API client test message<hr>Hello!"
             },
             'attaches': [
-                api.attach_file("sample.jpg")
+                attach_file("sample.jpg")
             ],
         },
         'relink' : 1,
@@ -68,16 +85,10 @@ Making an async request
         'group' : 'masssending',
     })
 
-    # Your tracking function definition if you want to track
-
-    def track_process(resp, status_msg):
-        print('---- %s' % status_msg) # Print a status message for example
-
-    # Waiting for the end of the process
-
-    result = api.track_wait(
-        response,
-        callback=track_process, # your tracking function (if necessary)
-        retry_interval=5,
-        max_attempts=100
-    )
+    # If the response has tracking data
+    if response.track:
+        # Refresh the tracking status
+        while response.track.check():
+            # Get the current status
+            print(response.track.status, response.track.status_message)
+            sleep(3)
