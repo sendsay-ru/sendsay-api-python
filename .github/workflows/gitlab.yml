@@ -1,6 +1,9 @@
 name: Backup to gitlab
 
-on: [push, delete]
+on:
+  push:
+  delete:
+  workflow_dispatch:
 
 jobs:
   to_gitlab:
@@ -12,7 +15,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: pixta-dev/repository-mirroring-action@v1
+      - uses: yesolutions/mirror-action@master
         with:
-          target_repo_url: git@gitlab.sndsy.ru:sendsay-ru/sendsay-api-python.git
-          ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+          REMOTE: git@gitlab.sndsy.ru:sendsay-ru/sendsay-api-python.git
+          PUSH_ALL_REFS: 'false'
+          GIT_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+          GIT_SSH_NO_VERIFY_HOST: 'true'
